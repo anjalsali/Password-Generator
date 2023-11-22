@@ -49,7 +49,52 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-function generatePassword() {}
+function generatePassword() {
+   var options = getPasswordOptions();
+
+   if (!options) {
+      // User canceled or entered invalid options
+      return "";
+   }
+
+   var allCharacters = [];
+   var result = [];
+
+   if (options.specialCharacters) {
+      allCharacters = allCharacters.concat(specialCharacters);
+   }
+
+   if (options.numericCharacters) {
+      allCharacters = allCharacters.concat(numericCharacters);
+   }
+
+   if (options.lowerCasedCharacters) {
+      allCharacters = allCharacters.concat(lowerCasedCharacters);
+   }
+
+   if (options.upperCasedCharacters) {
+      allCharacters = allCharacters.concat(upperCasedCharacters);
+   }
+
+   for (var i = 0; i < options.length; i++) {
+      var character = getRandom(allCharacters);
+      result.push(character);
+   }
+
+   // Convert the result array to a string
+   return result.join("");
+}
+
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+   var password = generatePassword();
+   var passwordText = document.querySelector("#password");
+
+   passwordText.value = password;
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
