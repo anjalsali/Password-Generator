@@ -11,7 +11,35 @@ var lowerCasedCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k
 var upperCasedCharacters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 // Function to prompt user for password options
-function getPasswordOptions() {}
+function getPasswordOptions() {
+   var length = parseInt(prompt("Enter the length of the password (between 8 and 128 characters):"));
+
+   // Check if the input is a number and within the specified range
+   if (isNaN(length) || length < 8 || length > 128) {
+      alert("Please enter a valid number between 8 and 128.");
+      return null;
+   }
+
+   var includeSpecialCharacters = confirm("Do you want to include special characters?");
+   var includeNumericCharacters = confirm("Do you want to include numeric characters?");
+   var includeLowerCasedCharacters = confirm("Do you want to include lowercase characters?");
+   var includeUpperCasedCharacters = confirm("Do you want to include uppercase characters?");
+
+   // Check if at least one character type is selected
+   if (!includeSpecialCharacters && !includeNumericCharacters && !includeLowerCasedCharacters && !includeUpperCasedCharacters) {
+      alert("Please select at least one character type.");
+      return null;
+   }
+
+   // Return an object with user choices
+   return {
+      length: length,
+      specialCharacters: includeSpecialCharacters,
+      numericCharacters: includeNumericCharacters,
+      lowerCasedCharacters: includeLowerCasedCharacters,
+      upperCasedCharacters: includeUpperCasedCharacters,
+   };
+}
 
 // Function for getting a random element from an array
 function getRandom(arr) {}
